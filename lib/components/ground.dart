@@ -4,13 +4,16 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/parallax.dart';
+import 'package:flappy_bird/extension.dart';
 import 'package:flappy_bird/game/configuration.dart';
 import 'package:flappy_bird/game/flappy_bird_game.dart';
+import 'package:flappy_bird/gen/assets.gen.dart';
 
 class Ground extends ParallaxComponent<FlappyBirdGame> with HasGameRef<FlappyBirdGame> {
   @override
   FutureOr<void> onLoad() async {
-    final ground = await Flame.images.load('ground.png');
+    final ground = await Flame.images.load(Assets.images.ground.name);
+
     parallax = Parallax(
       [
         ParallaxLayer(
@@ -21,6 +24,7 @@ class Ground extends ParallaxComponent<FlappyBirdGame> with HasGameRef<FlappyBir
         ),
       ],
     );
+
     add(
       RectangleHitbox(
         position: Vector2(
@@ -38,6 +42,7 @@ class Ground extends ParallaxComponent<FlappyBirdGame> with HasGameRef<FlappyBir
   @override
   void update(double dt) {
     parallax?.baseVelocity.x = Configuration.gameSpeed;
+
     super.update(dt);
   }
 }

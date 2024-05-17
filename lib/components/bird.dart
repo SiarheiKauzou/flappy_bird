@@ -3,21 +3,21 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:flappy_bird/extension.dart';
 import 'package:flappy_bird/game/bird_movement.dart';
 import 'package:flappy_bird/game/configuration.dart';
 import 'package:flappy_bird/game/flappy_bird_game.dart';
+import 'package:flappy_bird/gen/assets.gen.dart';
 import 'package:flappy_bird/screens/game_over_screen.dart';
 import 'package:flutter/material.dart';
 
 class Bird extends SpriteGroupComponent<BirdMovement>
     with HasGameRef<FlappyBirdGame>, CollisionCallbacks {
-  Bird();
-
   @override
   FutureOr<void> onLoad() async {
-    final birdUpFlap = await gameRef.loadSprite('bird_upflap.png');
-    final birdMidFlap = await gameRef.loadSprite('bird_midflap.png');
-    final birdDownFlap = await gameRef.loadSprite('bird_downflap.png');
+    final birdUpFlap = await gameRef.loadSprite(Assets.images.birdUpflap.name);
+    final birdMidFlap = await gameRef.loadSprite(Assets.images.birdMidflap.name);
+    final birdDownFlap = await gameRef.loadSprite(Assets.images.birdDownflap.name);
 
     size = Vector2(50, 40);
     position = Vector2(50, gameRef.size.y / 2 - size.y / 2);
@@ -34,12 +34,14 @@ class Bird extends SpriteGroupComponent<BirdMovement>
   @override
   void update(double dt) {
     position.y += Configuration.birdVelocity * dt;
+
     super.update(dt);
   }
 
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     gameOver();
+
     super.onCollisionStart(intersectionPoints, other);
   }
 
@@ -57,6 +59,7 @@ class Bird extends SpriteGroupComponent<BirdMovement>
         onComplete: () => current = BirdMovement.down,
       ),
     );
+
     current = BirdMovement.up;
   }
 

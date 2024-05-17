@@ -8,17 +8,15 @@ import 'package:flappy_bird/game/flappy_bird_game.dart';
 import 'package:flappy_bird/game/pipe_position.dart';
 
 class PipeGroup extends PositionComponent with HasGameRef<FlappyBirdGame> {
-  PipeGroup();
-
-  final _random = Random();
+  final random = Random();
 
   @override
   FutureOr<void> onLoad() async {
     position.x = gameRef.size.x;
 
     final heightMinusGround = gameRef.size.y - Configuration.groundHeight;
-    final spacing = 100 + _random.nextDouble() * (heightMinusGround / 4);
-    final centerY = spacing + _random.nextDouble() * (heightMinusGround - spacing);
+    final spacing = 100 + random.nextDouble() * (heightMinusGround / 4);
+    final centerY = spacing + random.nextDouble() * (heightMinusGround - spacing);
 
     addAll(
       [
