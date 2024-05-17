@@ -1,12 +1,18 @@
 import 'dart:async';
 
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flappy_bird/components/background.dart';
 import 'package:flappy_bird/components/bird.dart';
 import 'package:flappy_bird/components/ground.dart';
 import 'package:flappy_bird/components/pipe_group.dart';
+import 'package:flappy_bird/game/configuration.dart';
 
 class FlappyBirdGame extends FlameGame {
+  final _interval = Timer(
+    Configuration.pipeInterval,
+    repeat: true,
+  );
   late final Bird _bird;
 
   @override
@@ -16,8 +22,14 @@ class FlappyBirdGame extends FlameGame {
         Background(),
         Ground(),
         _bird = Bird(),
-        PipeGroup(),
       ],
     );
+    _interval.onTick = () => add(PipeGroup());
+  }
+
+  @override
+  void update(double dt) {
+    _interval.update(dt);
+    super.update(dt);
   }
 }
