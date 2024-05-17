@@ -5,7 +5,6 @@ import 'package:flame/flame.dart';
 import 'package:flame/parallax.dart';
 import 'package:flappy_bird/game/configuration.dart';
 import 'package:flappy_bird/game/flappy_bird_game.dart';
-import 'package:flutter/cupertino.dart';
 
 class Ground extends ParallaxComponent<FlappyBirdGame> {
   @override
