@@ -1,5 +1,6 @@
 import 'package:flappy_bird/game/flappy_bird_game.dart';
 import 'package:flappy_bird/gen/assets.gen.dart';
+import 'package:flappy_bird/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
 
 class GameOverScreen extends StatelessWidget {
@@ -21,6 +22,15 @@ class GameOverScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              'Score: ${game.bird.score}',
+              style: const TextStyle(
+                fontFamily: FontFamily.game,
+                color: Colors.white,
+                fontSize: 60,
+              ),
+            ),
+            const SizedBox(height: 20),
             Assets.images.gameover.image(),
             const SizedBox(height: 20),
             ElevatedButton(

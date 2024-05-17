@@ -24,6 +24,10 @@ flutter:
     - assets/audio/
     - assets/fonts/
     - assets/images/
+  fonts:
+    - family: Game
+      fonts:
+        - asset: assets/fonts/Game.ttf
 
 flutter_gen:
   output: lib/gen/
