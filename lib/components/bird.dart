@@ -6,6 +6,7 @@ import 'package:flame/effects.dart';
 import 'package:flappy_bird/game/bird_movement.dart';
 import 'package:flappy_bird/game/configuration.dart';
 import 'package:flappy_bird/game/flappy_bird_game.dart';
+import 'package:flappy_bird/screens/game_over_screen.dart';
 import 'package:flutter/material.dart';
 
 class Bird extends SpriteGroupComponent<BirdMovement>
@@ -59,7 +60,12 @@ class Bird extends SpriteGroupComponent<BirdMovement>
     current = BirdMovement.up;
   }
 
-  void gameOver() {
-    gameRef.pauseEngine();
+  void gameOver() => gameRef
+    ..overlays.add(GameOverScreen.id)
+    ..pauseEngine()
+    ..isHit = true;
+
+  void reset() {
+    position = Vector2(50, gameRef.size.y / 2 - size.y / 2);
   }
 }
