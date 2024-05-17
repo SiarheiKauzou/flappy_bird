@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flappy_bird/extension.dart';
 import 'package:flappy_bird/game/bird_movement.dart';
 import 'package:flappy_bird/game/configuration.dart';
@@ -37,6 +38,10 @@ class Bird extends SpriteGroupComponent<BirdMovement>
   void update(double dt) {
     position.y += Configuration.birdVelocity * dt;
 
+    if (position.y < 1) {
+      gameOver();
+    }
+
     super.update(dt);
   }
 
@@ -63,12 +68,18 @@ class Bird extends SpriteGroupComponent<BirdMovement>
     );
 
     current = BirdMovement.up;
+
+    FlameAudio.play(Assets.audio.fly.lastPart);
   }
 
-  void gameOver() => gameRef
-    ..overlays.add(GameOverScreen.id)
-    ..pauseEngine()
-    ..isHit = true;
+  void gameOver() {
+    FlameAudio.play(Assets.audio.collision.lastPart);
+
+    gameRef
+      ..overlays.add(GameOverScreen.id)
+      ..pauseEngine()
+      ..isHit = true;
+  }
 
   void reset() {
     position = Vector2(50, gameRef.size.y / 2 - size.y / 2);
