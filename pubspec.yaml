@@ -14,7 +14,18 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.4.9
+  flutter_gen_runner: ^5.4.0
   flutter_lints: ^4.0.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/audio/
+    - assets/fonts/
+    - assets/images/
+
+flutter_gen:
+  output: lib/gen/
+  integrations:
+    flutter_svg: true
