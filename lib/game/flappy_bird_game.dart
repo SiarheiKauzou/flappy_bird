@@ -9,7 +9,7 @@ import 'package:flappy_bird/components/ground.dart';
 import 'package:flappy_bird/components/pipe_group.dart';
 import 'package:flappy_bird/game/configuration.dart';
 
-class FlappyBirdGame extends FlameGame with TapDetector {
+class FlappyBirdGame extends FlameGame with TapDetector, HasCollisionDetection {
   final _interval = Timer(
     Configuration.pipeInterval,
     repeat: true,
